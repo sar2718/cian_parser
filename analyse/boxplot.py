@@ -35,13 +35,12 @@ for rooms, price, area in rows:
     price_m2_thousands = (price / 1000) / area
     groups[rooms].append(price_m2_thousands)
 
-# Подготовка данных для boxplot
 labels = []
 data = []
 
 for rooms in sorted(groups.keys()):
     values = groups[rooms]
-    if len(values) >= 100:  # фильтр на адекватность
+    if len(values) >= 100: 
         labels.append(f"{rooms}")
         data.append(values)
 
