@@ -8,7 +8,7 @@ client = clickhouse_connect.get_client(
     host=os.environ.get("CLICKHOUSE_HOST", "localhost"),
     port=int(os.environ.get("CLICKHOUSE_PORT", 8123)),
     username=os.environ.get("CLICKHOUSE_USER", "default"),
-    password=os.environ.get("CLICKHOUSE_PASSWORD", "")
+    password=os.environ.get("CLICKHOUSE_PASSWORD", ""),
 )
 
 try:
@@ -18,7 +18,7 @@ except Exception as e:
     print("Ошибка подключения:", e)
     exit(1)
 
-client.command('''
+client.command("""
 CREATE TABLE IF NOT EXISTS cian_ads (
     id UUID DEFAULT generateUUIDv4(),
     title String,
@@ -38,6 +38,6 @@ CREATE TABLE IF NOT EXISTS cian_ads (
     created_at DateTime DEFAULT now()
 ) ENGINE = MergeTree()
 ORDER BY id
-''')
+""")
 
 print("Таблица создана!")

@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 from config import OUTPUT_DIRNAME, OUTPUT_FILENAME
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 OUTPUT_DIR = os.path.join(BASE_DIR, OUTPUT_DIRNAME)
@@ -27,7 +26,6 @@ def generate_unique_filename(base_name: str) -> str:
         if not os.path.exists(final_path):
             return final_path
         counter += 1
-
 
 
 OUTPUT_FILE = generate_unique_filename(OUTPUT_FILENAME)

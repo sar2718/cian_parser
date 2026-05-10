@@ -33,10 +33,10 @@ LIMITS = tuple(range(10_000_000, 250_000_000 + 1, 1_000_000))
 
 # ----- ЗАДЕРЖКИ -----
 # Паузы между загрузкой страниц
-DELAY_BETWEEN_PAGES = (1, 3)    # сек
+DELAY_BETWEEN_PAGES = (1, 3)  # сек
 
 # Паузы между загрузкой объявлений
-DELAY_BETWEEN_ADS = (1, 2)      # сек
+DELAY_BETWEEN_ADS = (1, 2)  # сек
 
 
 # ----- ПОВТОРЫ -----
@@ -51,18 +51,14 @@ FETCH_DELAY = 5
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/113.0.5672.127 Safari/537.36",
-    
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 "
     "(KHTML, like Gecko) Version/16.1 Safari/605.1.15",
-    
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/114.0.5735.199 Safari/537.36",
-    
     "Mozilla/5.0 (iPhone; CPU iPhone OS 16_4 like Mac OS X) "
-    "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Mobile/15E148 Safari/604.1"
+    "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Mobile/15E148 Safari/604.1",
 ]
 
 

@@ -54,7 +54,7 @@ def main():
             print(active_url)
 
             parsed_ads_for_range = 0
-            
+
             current_url = active_url
             page_num = 1
 
@@ -71,7 +71,7 @@ def main():
                 if not listings:
                     print("⚡ Больше объявлений нет, завершаем разбор диапазона.")
                     break
-                
+
                 # Check if we have reached the total listings needed for this range
                 remaining_needed = total_listings - parsed_ads_for_range
                 if remaining_needed <= 0:
@@ -86,7 +86,9 @@ def main():
 
                 for listing in listings:
                     url = listing["url"]
-                    print(f"📄 [{total_parsed_ads + 1}] Парсим страницу объявления: {url}")
+                    print(
+                        f"📄 [{total_parsed_ads + 1}] Парсим страницу объявления: {url}"
+                    )
                     sys.stdout.flush()
 
                     detail_html = fetch_html(session, url)

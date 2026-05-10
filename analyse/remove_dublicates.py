@@ -1,13 +1,14 @@
 import os
 import json
 
+
 def load_json_files(folder_path: str) -> list:
 
     all_ads = []
 
     for filename in os.listdir(folder_path):
         if not filename.endswith(".json"):
-            continue 
+            continue
 
         file_path = os.path.join(folder_path, filename)
 
@@ -20,7 +21,9 @@ def load_json_files(folder_path: str) -> list:
                 elif isinstance(content, dict):
                     all_ads.append(content)
 
-            print(f" Загружено объявлений из {filename}: {len(content) if isinstance(content, list) else 1}")
+            print(
+                f" Загружено объявлений из {filename}: {len(content) if isinstance(content, list) else 1}"
+            )
 
         except Exception as e:
             print(f" Ошибка при чтении {file_path}: {e}")
@@ -38,7 +41,7 @@ def merge_ads(ad_list: list) -> tuple[list, int, int]:
 
         if url in merged_ads:
             duplicate_count += 1
-            continue  
+            continue
 
         merged_ads[url] = ad
 

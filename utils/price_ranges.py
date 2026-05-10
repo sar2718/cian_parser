@@ -1,12 +1,12 @@
 def generate_price_ranges(limits):
     if not limits:
         return [{"min": None, "max": None}]
-    
+
     sorted_limits = sorted(limits)
     ranges = [{"min": None, "max": sorted_limits[0]}]
 
     for i in range(1, len(sorted_limits)):
-        ranges.append({"min": sorted_limits[i-1], "max": sorted_limits[i]})
+        ranges.append({"min": sorted_limits[i - 1], "max": sorted_limits[i]})
 
     ranges.append({"min": sorted_limits[-1], "max": None})
     return ranges

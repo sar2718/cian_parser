@@ -10,7 +10,7 @@ client = clickhouse_connect.get_client(
     host=os.environ.get("CLICKHOUSE_HOST", "localhost"),
     port=int(os.environ.get("CLICKHOUSE_PORT", 8123)),
     username=os.environ.get("CLICKHOUSE_USER", "default"),
-    password=os.environ.get("CLICKHOUSE_PASSWORD", "")
+    password=os.environ.get("CLICKHOUSE_PASSWORD", ""),
 )
 
 client.command("SELECT 1")
@@ -30,11 +30,13 @@ areas = np.array([r[1] for r in rows], dtype=float)
 
 print(f"Получено {len(prices_rub)} объявлений")
 
-prices_mln = prices_rub / 1_000_000         
-price_m2_th = (prices_rub / areas) / 1_000 
+prices_mln = prices_rub / 1_000_000
+price_m2_th = (prices_rub / areas) / 1_000
+
 
 def limits(data, low=1, high=99):
     return np.percentile(data, low), np.percentile(data, high)
+
 
 output_dir = "analysis"
 os.makedirs(output_dir, exist_ok=True)

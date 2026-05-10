@@ -15,13 +15,14 @@ DISTRICT_STATS = SOURCE_DIR / "district_stats.json"
 VISUALIZATIONS = [
     "hist_total_price.png",
     "hist_price_m2.png",
-    "boxplot_price_m2_by_rooms.png"
+    "boxplot_price_m2_by_rooms.png",
 ]
 
 # Target directories
 EXAMPLES_DIR = Path(__file__).parent
 DATA_DIR = EXAMPLES_DIR / "data"
 VIZ_DIR = EXAMPLES_DIR / "visualizations"
+
 
 def main():
     # Create directory structure
@@ -49,6 +50,7 @@ def main():
         print(f"\nCopied {len(data)} listings")
 
     print("\nExamples generated successfully!")
+
 
 if __name__ == "__main__":
     main()

@@ -11,7 +11,7 @@ client = clickhouse_connect.get_client(
     host=os.environ.get("CLICKHOUSE_HOST", "localhost"),
     port=int(os.environ.get("CLICKHOUSE_PORT", 8123)),
     username=os.environ.get("CLICKHOUSE_USER", "default"),
-    password=os.environ.get("CLICKHOUSE_PASSWORD", "")
+    password=os.environ.get("CLICKHOUSE_PASSWORD", ""),
 )
 
 client.command("SELECT 1")
@@ -40,7 +40,7 @@ data = []
 
 for rooms in sorted(groups.keys()):
     values = groups[rooms]
-    if len(values) >= 100: 
+    if len(values) >= 100:
         labels.append(f"{rooms}")
         data.append(values)
 
@@ -51,11 +51,7 @@ output_dir = "analysis"
 os.makedirs(output_dir, exist_ok=True)
 
 plt.figure(figsize=(10, 6))
-plt.boxplot(
-    data,
-    tick_labels=labels,
-    showfliers=False
-)
+plt.boxplot(data, tick_labels=labels, showfliers=False)
 
 all_values = np.concatenate(data)
 ymin, ymax = np.percentile(all_values, [1, 99])

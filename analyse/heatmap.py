@@ -76,11 +76,13 @@ def handle_ad(ad_row, hex_stats, resolution=8):
     hex_stats[hex_id]["sum_price_m2"] += price_m2
     hex_stats[hex_id]["count"] += 1
 
+
 def process_ads_stream(client, resolution=8, filters=None):
     hex_stats = defaultdict(lambda: {"sum_price_m2": 0.0, "count": 0})
     for row in stream_ads(client, filters):
         handle_ad(row, hex_stats, resolution)
     return hex_stats
+
 
 def hexagons_to_features(hex_stats):
     features = []
@@ -89,18 +91,20 @@ def hexagons_to_features(hex_stats):
         boundary = h3.cell_to_boundary(hex_id)
         boundary = [[lon, lat] for lat, lon in boundary]
         polygon = Polygon(boundary)
-        features.append({
-            "type": "Feature",
-            "id": hex_id,
-            "geometry": mapping(polygon),
-            "properties": {
-                "avg_price_m2": round(avg, 2),
-                "count": stats["count"]
+        features.append(
+            {
+                "type": "Feature",
+                "id": hex_id,
+                "geometry": mapping(polygon),
+                "properties": {"avg_price_m2": round(avg, 2), "count": stats["count"]},
             }
-        })
+        )
     return {"type": "FeatureCollection", "features": features}
 
-def build_map(feature_collection, center=[55.75, 37.62], zoom=10, output="heatmap.html"):
+
+def build_map(
+    feature_collection, center=[55.75, 37.62], zoom=10, output="heatmap.html"
+):
     vals = []
     for f in dict(feature_collection).get("features", []):
         try:
@@ -112,26 +116,19 @@ def build_map(feature_collection, center=[55.75, 37.62], zoom=10, output="heatma
     if not vals:
         print("Нет данных для colormap.")
         return
-    
+
     vmin = np.percentile(vals, 30)
     vmed = np.percentile(vals, 70)
     vmax = np.percentile(vals, 95)
     v99 = np.percentile(vals, 99.5)
 
-    colors = [
-        "#1a9850",
-        "#fee08b",
-        "#d73027",
-        "#000000"
-    ]
+    colors = ["#1a9850", "#fee08b", "#d73027", "#000000"]
     colormap = LinearColormap(
-        colors=colors,
-        index=[vmin, vmed, vmax, v99],
-        vmin=vmin,
-        vmax=v99
+        colors=colors, index=[vmin, vmed, vmax, v99], vmin=vmin, vmax=v99
     )
     colormap.caption = "Средняя цена за м² (₽)"
     m = folium.Map(location=center, zoom_start=zoom, tiles="CartoDB positron")
+
     def style_fn(feature):
         try:
             v = float(feature["properties"]["avg_price_m2"])
@@ -144,25 +141,24 @@ def build_map(feature_collection, center=[55.75, 37.62], zoom=10, output="heatma
             "weight": 0.3,
             "fillOpacity": 0.7,
         }
-    
+
     folium.GeoJson(
         feature_collection,
         style_function=style_fn,
         tooltip=folium.GeoJsonTooltip(
             fields=["avg_price_m2", "count"],
             aliases=["Средняя цена за м² (₽):", "Объявлений:"],
-            localize=True
-            )
+            localize=True,
+        ),
     ).add_to(m)
     colormap.add_to(m)
     m.save(output)
     print(f"Карта сохранена в {output}")
 
 
-
 def main():
     filters = {
-        "price_min": None,     
+        "price_min": None,
         "price_max": None,
         "rooms": None,
         "housing_type": None,
@@ -172,7 +168,7 @@ def main():
         "building_year_max": None,
         "material_type": None,
         "metro_time_max": None,
-        "district": "ЦАО"
+        "district": "ЦАО",
     }
 
     load_dotenv()
@@ -182,7 +178,7 @@ def main():
         host=os.environ.get("CLICKHOUSE_HOST", "localhost"),
         port=int(os.environ.get("CLICKHOUSE_PORT", 8123)),
         username=os.environ.get("CLICKHOUSE_USER", "default"),
-        password=os.environ.get("CLICKHOUSE_PASSWORD", "")
+        password=os.environ.get("CLICKHOUSE_PASSWORD", ""),
     )
 
     try:
@@ -190,17 +186,14 @@ def main():
         print("Подключение к ClickHouse успешно!")
     except Exception as e:
         print("Ошибка подключения:", e)
-    
-    hex_stats = process_ads_stream(
-        client,
-        resolution=hex_resolution,
-        filters=filters
-    )
+
+    hex_stats = process_ads_stream(client, resolution=hex_resolution, filters=filters)
     print(f"Гексагонов найдено: {len(hex_stats)}")
     print("Создание GeoJSON...")
     feature_collection = hexagons_to_features(hex_stats)
     print("Генерация карты...")
     build_map(feature_collection)
+
 
 if __name__ == "__main__":
     main()

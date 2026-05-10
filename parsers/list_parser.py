@@ -24,10 +24,7 @@ def parse_list_page(html: str):
         address = ", ".join(address_parts) if address_parts else None
 
         if url:
-            listings.append({
-                "url": url,
-                "address": address
-            })
+            listings.append({"url": url, "address": address})
 
     return listings
 
@@ -40,15 +37,16 @@ def parse_total_listings(html):
     soup = BeautifulSoup(html, "lxml")
 
     info = soup.select_one('h5[class*="color_text-primary-default"]')
-        
+
     if info:
         text = info.get_text(strip=True)
     else:
         return 0
 
-    count = ''
+    count = ""
     for i in text:
-        if i.isdigit(): count += i
+        if i.isdigit():
+            count += i
     count = int(count)
 
     return count
