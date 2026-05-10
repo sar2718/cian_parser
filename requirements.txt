@@ -1,3 +1,14 @@
+# Парсинг
 requests
 beautifulsoup4
 lxml
+
+# Анализ данных
+clickhouse-connect
+folium
+branca
+h3
+numpy
+shapely
+matplotlib
+python-dotenv
