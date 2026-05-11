@@ -1,6 +1,7 @@
 import json
-import clickhouse_connect
 import os
+
+import clickhouse_connect
 from dotenv import load_dotenv
 
 load_dotenv()

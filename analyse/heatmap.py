@@ -1,13 +1,14 @@
-import folium
+import os
+from collections import defaultdict
+
 import branca.colormap as cm
 import clickhouse_connect
+import folium
 import h3
-from branca.colormap import LinearColormap
-from collections import defaultdict
-from shapely.geometry import Polygon, mapping
 import numpy as np
-import os
+from branca.colormap import LinearColormap
 from dotenv import load_dotenv
+from shapely.geometry import Polygon, mapping
 
 
 def stream_ads(client, filters=None):

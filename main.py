@@ -1,26 +1,16 @@
-import time
 import random
 import sys
+import time
 
-from parsers.fetcher import create_session, fetch_html
-from parsers.list_parser import (
-    parse_list_page,
-    parse_total_listings,
-    extract_next_page_url,
-)
+from config import (BASE_URL, DELAY_BETWEEN_ADS, DELAY_BETWEEN_PAGES, LIMITS,
+                    ROOMS)
 from parsers.detail_parser import parse_detail_page
-
+from parsers.fetcher import create_session, fetch_html
+from parsers.list_parser import (extract_next_page_url, parse_list_page,
+                                 parse_total_listings)
 from utils.file_paths import OUTPUT_FILE
-from utils.price_ranges import generate_price_ranges, build_url
 from utils.json_writer import JsonWriter
-
-from config import (
-    ROOMS,
-    BASE_URL,
-    LIMITS,
-    DELAY_BETWEEN_PAGES,
-    DELAY_BETWEEN_ADS,
-)
+from utils.price_ranges import build_url, generate_price_ranges
 
 
 def main():

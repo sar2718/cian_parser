@@ -1,9 +1,10 @@
+import json
 import os
+from collections import defaultdict
+
 import clickhouse_connect
 import numpy as np
-from collections import defaultdict
 from dotenv import load_dotenv
-import json
 
 load_dotenv()
 

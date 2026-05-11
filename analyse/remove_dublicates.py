@@ -1,5 +1,5 @@
-import os
 import json
+import os
 
 
 def load_json_files(folder_path: str) -> list:

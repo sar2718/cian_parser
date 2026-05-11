@@ -1,8 +1,9 @@
-import requests
 import random
 import time
 
-from config import FETCH_RETRIES, FETCH_DELAY, USER_AGENTS, DEFAULT_HEADERS
+import requests
+
+from config import DEFAULT_HEADERS, FETCH_DELAY, FETCH_RETRIES, USER_AGENTS
 
 
 def create_session() -> requests.Session:

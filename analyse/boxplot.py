@@ -1,8 +1,9 @@
 import os
-import numpy as np
-import matplotlib.pyplot as plt
-import clickhouse_connect
 from collections import defaultdict
+
+import clickhouse_connect
+import matplotlib.pyplot as plt
+import numpy as np
 from dotenv import load_dotenv
 
 load_dotenv()
