@@ -2,14 +2,12 @@ import random
 import sys
 import time
 
-from config import BASE_URL, DELAY_BETWEEN_ADS, DELAY_BETWEEN_PAGES, LIMITS, ROOMS
+from config import (BASE_URL, DELAY_BETWEEN_ADS, DELAY_BETWEEN_PAGES, LIMITS,
+                    ROOMS)
 from parsers.detail_parser import parse_detail_page
 from parsers.fetcher import create_session, fetch_html
-from parsers.list_parser import (
-    extract_next_page_url,
-    parse_list_page,
-    parse_total_listings,
-)
+from parsers.list_parser import (extract_next_page_url, parse_list_page,
+                                 parse_total_listings)
 from utils.file_paths import OUTPUT_FILE
 from utils.json_writer import JsonWriter
 from utils.price_ranges import build_url, generate_price_ranges
