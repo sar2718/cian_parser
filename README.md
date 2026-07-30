@@ -94,13 +94,15 @@ https://www.cian.ru/cat.php?...
 
 ![Распределение цен](examples/visualizations/hist_total_price.png)
 
-### Интерактивная карта
+### Интерактивная тепловая карта
 
-На основе собранных координат можно построить интерактивную карту с агрегацией данных по H3-гексагонам. Карта отображает пространственное распределение стоимости квартир и открывается в любом современном браузере.
+Помимо статических графиков, проект позволяет визуализировать собранные объявления на интерактивной карте. Цены агрегируются по H3-гексагонам, после чего карта отображается с помощью Folium/Leaflet.
 
-![Heatmap](examples/screenshots/heatmap.png)
+![Тепловая карта](examples/visualizations/heatmap.jpg)
 
-Интерактивная версия доступна в [`examples/heatmap.html`](examples/heatmap.html).
+Интерактивную версию можно открыть в браузере:
+
+[`examples/visualizations/heatmap.html`](examples/visualizations/heatmap.html)
 
 Подробнее см. [examples/README.md](examples/README.md)
 
